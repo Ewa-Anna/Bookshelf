@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from .models import Book
 
 
-def download_file(request, file_type):
+def download(request, file_type):
     data = Book.objects.all().values()
     df = pd.DataFrame(data)
 

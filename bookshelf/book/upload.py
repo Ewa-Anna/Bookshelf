@@ -25,7 +25,7 @@ def upload(request):
                     author=row["author"],
                     description=row["description"]
                 )
-            return redirect("library")
+            return redirect("book_list")
         except Exception as e:
             return render(request, "upload.html", {"error": str(e)})
     
