@@ -7,5 +7,6 @@ class BookAdmin(admin.ModelAdmin):
         "title",
         "author",
     )
-    
+
+
 admin.site.register(Book, BookAdmin)

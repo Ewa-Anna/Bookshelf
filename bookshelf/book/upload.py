@@ -7,7 +7,7 @@ from .models import Book
 
 
 def upload(request):
-    if request.method=="POST" and request.FILES["file"]:
+    if request.method == "POST" and request.FILES["file"]:
         file = request.FILES["file"]
         fs = FileSystemStorage()
         filename = fs.save(file.name, file)
@@ -23,10 +23,10 @@ def upload(request):
                 Book.objects.create(
                     title=row["title"],
                     author=row["author"],
-                    description=row["description"]
+                    description=row["description"],
                 )
             return redirect("book_list")
         except Exception as e:
             return render(request, "upload.html", {"error": str(e)})
-    
+
     return render(request, "upload.html")
