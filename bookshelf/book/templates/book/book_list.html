@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Bookshelf{% endblock %}
+
+{% block content %}
+<div>
+    {% for book in book_list %}
+        {{ book.title }}
+    {% endfor %}
+</div>
+
+{% endblock %}

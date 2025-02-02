@@ -16,4 +16,4 @@ def book_list(request):
             | Q(genre__icontains=query)
         )
     context = {"book_list": book_list, "books": books}
-    return render(request, "book/list.html", context=context)
+    return render(request, "book/book_list.html", context=context)
