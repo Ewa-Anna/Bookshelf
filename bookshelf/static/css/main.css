@@ -12,3 +12,9 @@
 *::after :hover {
     text-decoration: none;
 }
+
+.card-img-top {
+    max-width: 100%;  
+    max-height: 300px;  
+    object-fit: cover;  
+}

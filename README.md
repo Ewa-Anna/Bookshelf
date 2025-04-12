@@ -1,7 +1,11 @@
 # 📚 Bookshelf Web App
 
 ## Table of Contents
-[[_TOC_]]
+- [Features](#features)
+- [Technologies](#technologies)
+- [Installation](#installation)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Features
 - Upload Books: Import book details from CSV or Excel files.
