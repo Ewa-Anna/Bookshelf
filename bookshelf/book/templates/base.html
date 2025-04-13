@@ -25,8 +25,10 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{% url 'book:download' file_type='csv' %}">Download CSV</a>
+                    <a class="dropdown-item" href="{% url 'book:download' file_type='xlsx' %}">Download Excel</a>
                 </div>
-            </li>          </ul>
+            </li>          
+        </ul>
           <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
               <li class="nav-item"><a class="nav-link" href="">Logout</a></li>
