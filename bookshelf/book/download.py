@@ -37,3 +37,27 @@ def download(request, file_type):
         return HttpResponse("Unsupported file type.", status=400)
 
     return response
+
+
+def download_template(request, file_type):
+    columns = ["title", "author", "description"]
+    df = pd.DataFrame(columns=columns)
+
+    if file_type == "csv":
+        response = HttpResponse(content_type="text/csv")
+        response["Content-Disposition"] = 'attachment; filename="template.csv"'
+        df.to_csv(path_or_buf=response, index=False)
+        return response
+
+    elif file_type == "xlsx":
+        output = BytesIO()
+        with pd.ExcelWriter(output, engine="openpyxl") as writer:
+            df.to_excel(writer, index=False, sheet_name="Books")
+        response = HttpResponse(
+            content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
+        response["Content-Disposition"] = 'attachment; filename="template.xlsx"'
+        response.write(output.getvalue())
+        return response
+
+    return HttpResponse("Unsupported file type.", status=400)

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Bookshelf{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Bookshelf</h2>
+
+    <h5 class="mb-4">
+        Upload your books or download import template:
+    </h5>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+      
+        <div class="form-group">
+            <label for="file" class="btn btn-primary">
+                <i class="fas fa-paperclip"></i> Choose file
+                <input type="file" name="file" id="file" style="display: none;" required>
+            </label>
+            <span id="file-name" class="ml-2 text-muted">No file has been chosen.</span>
+        </div>
+
+        <div>
+          <label><input type="radio" name="mode" value="add" checked> Add to existing</label>
+          <label><input type="radio" name="mode" value="overwrite"> Overwrite existing</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-upload"></i> Upload
+        </button>
+      
+        {% if error %}
+          <p style="color: red;">{{ error }}</p>
+        {% endif %}
+      
+        <hr>
+        <p>Download a template:</p>
+        <a href="{% url 'book:download_template' file_type='csv' %}">Download CSV template</a> |
+        <a href="{% url 'book:download_template' file_type='xlsx' %}">Download Excel template</a>
+      </form>
+    <div>
+        <br>
+        Please be cautious! Uploading an empty template with the <i>Overwrite</i> option will erase your current bookshelf.      
+    </div>
+      
+</div>
+
+<script>
+    document.getElementById("file").addEventListener("change", function() {
+        var fileName = this.files && this.files[0] ? this.files[0].name : "No file chosen";
+        document.getElementById("file-name").textContent = fileName;
+    });
+</script>
+
+{% endblock %}
