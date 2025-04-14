@@ -5,6 +5,7 @@ from django.core.files.storage import FileSystemStorage
 
 from .models import Book
 
+
 def upload(request):
     if request.method == "POST" and request.FILES.get("file"):
         file = request.FILES["file"]
@@ -20,11 +21,15 @@ def upload(request):
             elif filename.endswith(".xlsx"):
                 data = pd.read_excel(file_path)
             else:
-                return render(request, "book/upload.html", {"error": "Unsupported file format."})
+                return render(
+                    request, "book/upload.html", {"error": "Unsupported file format."}
+                )
 
             required_columns = {"title", "author", "description"}
             if not required_columns.issubset(data.columns):
-                return render(request, "book/upload.html", {"error": "Missing required columns."})
+                return render(
+                    request, "book/upload.html", {"error": "Missing required columns."}
+                )
 
             if mode == "overwrite":
                 Book.objects.all().delete()
@@ -39,6 +44,8 @@ def upload(request):
             return redirect("book:book_list")
 
         except Exception as e:
-            return render(request, "book/upload.html", {"error": f"Upload failed: {str(e)}"})
+            return render(
+                request, "book/upload.html", {"error": f"Upload failed: {str(e)}"}
+            )
 
     return render(request, "book/upload.html")
