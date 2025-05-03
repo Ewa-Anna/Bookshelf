@@ -13,4 +13,5 @@ urlpatterns = [
     ),
     path("download/<str:file_type>/", download.download, name="download"),
     path("", views.book_list, name="book_list"),
+    path("books/<int:pk>/", views.book_detail, name="book_detail"),
 ]
